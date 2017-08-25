@@ -1,6 +1,6 @@
 package XObject;
 
-public interface XObject {
+public interface XInterface {
 	public void setObject();
 	public void getObject();
 }

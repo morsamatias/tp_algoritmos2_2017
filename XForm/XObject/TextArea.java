@@ -1,6 +1,6 @@
 package XObject;
 
-public class TextArea implements XObject {
+public class TextArea extends XObject {
 
 	@Override
 	public void setObject() {

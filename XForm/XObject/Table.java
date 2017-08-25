@@ -1,6 +1,6 @@
 package XObject;
 
-public class Table implements XObject {
+public class Table extends XObject {
 
 	@Override
 	public void setObject() {

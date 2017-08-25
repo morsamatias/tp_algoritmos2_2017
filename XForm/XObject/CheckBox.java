@@ -1,6 +1,6 @@
 package XObject;
 
-public class CheckBox implements XObject {
+public class CheckBox extends XObject {
 
 	@Override
 	public void setObject() {

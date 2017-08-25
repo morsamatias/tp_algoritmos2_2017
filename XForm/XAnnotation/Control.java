@@ -1,6 +1,8 @@
 package XAnnotation;
 
+import XObject.XObject;
+
 public @interface Control {
 	String label();
-	String type();
+	Class<? extends XObject> type();
 }

@@ -1,6 +1,6 @@
 package XObject;
 
-public class RadioBox implements XObject {
+public class RadioBox extends XObject {
 
 	@Override
 	public void setObject() {

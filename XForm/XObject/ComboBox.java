@@ -1,6 +1,6 @@
 package XObject;
 
-public class ComboBox implements XObject {
+public class ComboBox extends XObject {
 
 	@Override
 	public void setObject() {

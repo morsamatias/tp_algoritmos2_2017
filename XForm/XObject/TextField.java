@@ -1,6 +1,6 @@
 package XObject;
 
-public class TextField implements XObject {
+public class TextField extends XObject {
 
 	@Override
 	public void setObject() {

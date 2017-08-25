@@ -1,6 +1,6 @@
 package XObject;
 
-public class TextPasswordField implements XObject {
+public class TextPasswordField extends XObject {
 
 	@Override
 	public void setObject() {
