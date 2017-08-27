@@ -1,10 +1,31 @@
 package XClass;
 
-public class XForm {
+import java.util.Hashtable;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+import org.omg.CORBA.Request;
 
+import XApplication.Application;
+import XObject.XObject;
+
+public abstract class XForm {
+	Hashtable<String, XObject> components = new Hashtable<>();
+	Application frame = null;
+	Request request;
+	
+	public void onLoad(Request request) {}
+	public boolean onSubmit(Request request) { return true; }
+	public void onBack() {}
+	
+	public Application getFrame() {
+		return frame;
 	}
-
+	public void setFrame(Application frame) {
+		this.frame = frame;
+	}
+	public Request getRequest() {
+		return request;
+	}
+	public void setRequest(Request request) {
+		this.request = request;
+	}
 }
