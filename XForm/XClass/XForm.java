@@ -28,4 +28,9 @@ public abstract class XForm {
 	public void setRequest(Request request) {
 		this.request = request;
 	}
+	
+	// Dado el frame, agrega todos los componentes y los dibuja
+	public void draw() {
+		// TODO foreach componentes, panel.add componente
+	}
 }
