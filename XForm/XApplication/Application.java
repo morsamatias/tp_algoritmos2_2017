@@ -1,58 +1,78 @@
 package XApplication;
 
 import java.awt.BorderLayout;
-import java.util.Hashtable;
-
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.peer.ButtonPeer;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import XAnnotation.BackButton;
+import XAnnotation.NextButton;
 import XClass.XForm;
+import XObject.XObject;
 import tp_algoritmos2.Demo.EscuchaApp;
 
-public class Application {
+public class Application  {
+	
+	
 	private int width = 400;
 	private int height = 400;
 	private boolean visible = false;
 	private JFrame frame;
+	private JPanel panelCentral;
+	private NextButton siguiente;
+	private BackButton anterior;
 	// Variable para guardar todos los formularios que va a tener la aplicacion
-	Hashtable<String, Class<? extends XForm>> forms = new Hashtable<>();
+	ArrayList<XForm> forms = new ArrayList<>();
 	
 	public Application(EscuchaApp escuchaApp) {
-		frame = new JFrame("Contenedor");
 		
-		JPanel panelCentral = new JPanel();
+	
+	frame = new JFrame("Contenedor");
+			
+		panelCentral = new JPanel();
 		JPanel panelSur = new JPanel();
-		
-		// TODO Eliminar estos de prueba
-		JLabel labelTest = new JLabel("Label de Prueba");
+				
 		JButton buttonBack = new JButton("Anterior");
 		JButton buttonNext = new JButton("Siguiente");
 		
-		panelCentral.add(labelTest);
+		// panelCentral.add(labelTest);
 		panelSur.add(buttonBack);
 		panelSur.add(buttonNext);
 		
 		frame.add(panelCentral, BorderLayout.CENTER);
 		frame.add(panelSur, BorderLayout.SOUTH);
 	}
-
-	public void showForm(/*String nombreForm*/) {
-//		Class<? extends XForm> formulario = getForm(nombreForm);
-//		formulario.draw();
+	
+	public void showForm() {
+		XForm formulario = getForm();
+		formulario.draw(this);
 		frame.setSize(getWidth(), getWidth());
 		frame.setVisible(true);
 	}
 	
 	// Agrega el formulario a nuestra tabla que los almacena
-	public void registerFrom(Class<? extends XForm> formClass) {
-		forms.put(formClass.getName(), formClass);
+	public void registerFrom(XForm formClass) {
+		forms.add(formClass);
 	}
 	
 	// Devuelve el formulario que se va a usar
-	public Class<? extends XForm> getForm(String nombreForm) {
-		return forms.get(nombreForm);
+	public XForm getForm() {
+		return forms.get(0);
+	}
+	
+	public void addComponent(XObject component)
+	{
+		component.draw(panelCentral);
+	}
+	
+	public JPanel getPanelCentral()
+	{
+		return panelCentral;
 	}
 	
 	// Setea el tamanio del formulario
@@ -84,5 +104,12 @@ public class Application {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-
+	
+	public void setSiguiente(NextButton siguiente){
+		this.siguiente = siguiente;
+	}
+	public void setAnterior(BackButton anterior){
+		this.anterior = anterior; 
+	}
+	
 }
