@@ -1,17 +1,13 @@
 package XApplication;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.peer.ButtonPeer;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import XAnnotation.BackButton;
-import XAnnotation.NextButton;
+//import XAnnotation.BackButton;
+//import XAnnotation.NextButton;
 import XClass.XForm;
 import XObject.XObject;
 import tp_algoritmos2.Demo.EscuchaApp;
@@ -24,8 +20,8 @@ public class Application  {
 	private boolean visible = false;
 	private JFrame frame;
 	private JPanel panelCentral;
-	private NextButton siguiente;
-	private BackButton anterior;
+//	private NextButton siguiente;
+//	private BackButton anterior;
 	// Variable para guardar todos los formularios que va a tener la aplicacion
 	ArrayList<XForm> forms = new ArrayList<>();
 	
@@ -56,8 +52,9 @@ public class Application  {
 	}
 	
 	// Agrega el formulario a nuestra tabla que los almacena
-	public void registerFrom(XForm formClass) {
-		forms.add(formClass);
+	public void registerFrom(Class<? extends XForm> formClass) {
+		// TODO Hay que ver que onda esto
+//		forms.add(formClass);
 	}
 	
 	// Devuelve el formulario que se va a usar
@@ -105,11 +102,11 @@ public class Application  {
 		this.height = height;
 	}
 	
-	public void setSiguiente(NextButton siguiente){
-		this.siguiente = siguiente;
-	}
-	public void setAnterior(BackButton anterior){
-		this.anterior = anterior; 
-	}
+//	public void setSiguiente(NextButton siguiente){
+//		this.siguiente = siguiente;
+//	}
+//	public void setAnterior(BackButton anterior){
+//		this.anterior = anterior; 
+//	}
 	
 }

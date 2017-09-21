@@ -129,10 +129,8 @@ public abstract class XForm {
 		
 		
 		//Le envio el siguiente y el anterior a la app
-		app.setSiguiente(nextButton);
-		app.setAnterior(backButton);
+//		app.setSiguiente(nextButton);
+//		app.setAnterior(backButton);
 		
-		
-		// TODO foreach componentes, panel.add componente
 	}
 }
