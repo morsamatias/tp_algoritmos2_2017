@@ -53,8 +53,12 @@ public class Application  {
 	
 	// Agrega el formulario a nuestra tabla que los almacena
 	public void registerFrom(Class<? extends XForm> formClass) {
-		// TODO Hay que ver que onda esto
-//		forms.add(formClass);
+		try {
+			XForm form = formClass.newInstance();
+			forms.add(form);
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// Devuelve el formulario que se va a usar

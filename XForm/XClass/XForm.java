@@ -57,11 +57,15 @@ public abstract class XForm {
 			
 			if(anotations != null && anotations instanceof Control)
 			{
-				//Class<? extends XObject> xAnot =  anotations.type();
-				//Class<? extends XObject> xobj =  new anotations.type();
-				TextField text = new TextField();
-				text.setObject(anotations.label());
-				listaControl.add(text);
+				Class<? extends XObject> xobj = anotations.type();
+				try {
+					XObject obj = xobj.newInstance();
+					obj.setObject(anotations.label());
+					listaControl.add(obj);
+
+				} catch (InstantiationException | IllegalAccessException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			BackButton anotationsBackButtons = variable.getAnnotation(BackButton.class);
