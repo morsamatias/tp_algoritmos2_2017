@@ -1,18 +1,15 @@
 package XApplication;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import javax.swing.JButton;
+import java.util.Hashtable;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-//import XAnnotation.BackButton;
-//import XAnnotation.NextButton;
 import XClass.XForm;
 import XObject.XObject;
 import tp_algoritmos2.Demo.EscuchaApp;
 
-public class Application  {
+public class Application {
 	
 	
 	private int width = 400;
@@ -20,52 +17,38 @@ public class Application  {
 	private boolean visible = false;
 	private JFrame frame;
 	private JPanel panelCentral;
-//	private NextButton siguiente;
-//	private BackButton anterior;
+	private JPanel panelSur;
 	// Variable para guardar todos los formularios que va a tener la aplicacion
-	ArrayList<XForm> forms = new ArrayList<>();
+	Hashtable<String,XForm> forms = new Hashtable<>();
 	
 	public Application(EscuchaApp escuchaApp) {
 		
-	
-	frame = new JFrame("Contenedor");
-			
+		frame = new JFrame("contenedor");
+
 		panelCentral = new JPanel();
-		JPanel panelSur = new JPanel();
-				
-		JButton buttonBack = new JButton("Anterior");
-		JButton buttonNext = new JButton("Siguiente");
-		
-		// panelCentral.add(labelTest);
-		panelSur.add(buttonBack);
-		panelSur.add(buttonNext);
-		
+		panelSur = new JPanel();
+
 		frame.add(panelCentral, BorderLayout.CENTER);
 		frame.add(panelSur, BorderLayout.SOUTH);
 	}
 	
-	public void showForm() {
-		XForm formulario = getForm();
-		formulario.draw(this);
+	public void showForm(String nombreForm) {
+		XForm form = forms.get(nombreForm);
+		form.draw(this);
 		frame.setSize(getWidth(), getWidth());
 		frame.setVisible(true);
 	}
-	
+
 	// Agrega el formulario a nuestra tabla que los almacena
 	public void registerFrom(Class<? extends XForm> formClass) {
 		try {
 			XForm form = formClass.newInstance();
-			forms.add(form);
+			forms.put(form.getNombre(), form);
 		} catch (InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	// Devuelve el formulario que se va a usar
-	public XForm getForm() {
-		return forms.get(0);
-	}
-	
+		
 	public void addComponent(XObject component)
 	{
 		component.draw(panelCentral);
@@ -76,6 +59,11 @@ public class Application  {
 		return panelCentral;
 	}
 	
+	public JPanel getPanelSur()
+	{
+		return panelSur;
+	}
+		
 	// Setea el tamanio del formulario
 	public void setSize(int width_value, int height_value) {
 		setWidth(width_value);
@@ -106,11 +94,17 @@ public class Application  {
 		this.height = height;
 	}
 	
-//	public void setSiguiente(NextButton siguiente){
-//		this.siguiente = siguiente;
-//	}
-//	public void setAnterior(BackButton anterior){
-//		this.anterior = anterior; 
-//	}
-	
+	public void setTitulo(String titulo)
+	{
+		this.frame.setTitle(titulo) ;
+	}
+
+	public void limpiaForm() {
+		panelCentral.removeAll();
+		panelCentral.revalidate();
+		panelCentral.repaint();
+		panelSur.removeAll();
+		panelSur.revalidate();
+		panelSur.repaint();
+	}
 }
