@@ -87,20 +87,6 @@ public abstract class XForm implements ActionListener {
 				nombre = anotation.name();
 			}
 		
-		}	
-
-		NextButton[] anotations3 = clase.getAnnotationsByType(NextButton.class);
-		
-		for(NextButton anotation:anotations3){
-			if((anotation != null) && anotation instanceof NextButton)
-			{
-				JButton buttonNext = new JButton("Siguiente");
-				buttonNext.setActionCommand("siguiente");
-				buttonNext.setMnemonic(KeyEvent.VK_D);
-				buttonNext.addActionListener(this);
-				app.getPanelSur().add(buttonNext);
-				nextForm = anotation.name();
-			}
 		}
 		
 		BackButton[] anotations4 = clase.getAnnotationsByType(BackButton.class);
@@ -117,6 +103,20 @@ public abstract class XForm implements ActionListener {
 			}
 		}
 		
+
+		NextButton[] anotations3 = clase.getAnnotationsByType(NextButton.class);
+		
+		for(NextButton anotation:anotations3){
+			if((anotation != null) && anotation instanceof NextButton)
+			{
+				JButton buttonNext = new JButton("Siguiente");
+				buttonNext.setActionCommand("siguiente");
+				buttonNext.setMnemonic(KeyEvent.VK_D);
+				buttonNext.addActionListener(this);
+				app.getPanelSur().add(buttonNext);
+				nextForm = anotation.name();
+			}
+		}
 		for(Field variable:variables)
 		{
 			
