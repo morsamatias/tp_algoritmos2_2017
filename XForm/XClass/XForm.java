@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -24,7 +26,6 @@ public abstract class XForm implements ActionListener {
 	ArrayList<XObject> components = new ArrayList<>();
 	
 	ArrayList<XObject> listaAction = new ArrayList<>();
-	ArrayList<XObject> listaControl = new ArrayList<>();
 	ArrayList<String> listaFormNombre = new ArrayList<>();
 	ArrayList<XObject> listaSubmitButton = new ArrayList<>();
 	
@@ -78,7 +79,8 @@ public abstract class XForm implements ActionListener {
 		Class<? extends XForm> clase = this.getClass();
 		Form[] anotations2 = clase.getAnnotationsByType(Form.class);
 		Field[] variables = clase.getDeclaredFields();
-		
+		ArrayList<XObject> listaControl = new ArrayList<>();
+
 		for(Form anotation:anotations2){
 			
 			if(anotation != null && anotation instanceof Form)
@@ -139,9 +141,16 @@ public abstract class XForm implements ActionListener {
 			
 			if(anotationsAction != null && anotationsAction instanceof Action)
 			{
-				
-				// No se que hacer aca
-
+				try
+				{
+					Method metodo = clase.getMethod(anotationsAction.method());
+					metodo.invoke(clase);
+				}
+				catch(NoSuchMethodException|SecurityException|IllegalAccessException|IllegalArgumentException|InvocationTargetException  e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			SubmitButton anotationsSubmitButton = variable.getAnnotation(SubmitButton.class);
