@@ -19,6 +19,7 @@ public class TextArea extends XObject {
 	{
 		JLabel xlabel = new JLabel(nombre);
 		JTextArea xtext = new JTextArea();
+//		xtext.addActionListener(this.getActionListener());
 		xtext.setSize(50, 100);
 		xtext.setVisible(true);
 		panelCentral.add(xlabel);

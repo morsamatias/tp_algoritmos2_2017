@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
@@ -47,6 +46,7 @@ public abstract class XForm implements ActionListener {
 	public void setFrame(Application frame) {
 		this.frame = frame;
 	}
+
 	public String getNombre() {
 		Class<? extends XForm> clase = this.getClass();
 		
@@ -126,31 +126,33 @@ public abstract class XForm implements ActionListener {
 			
 			if(anotations != null && anotations instanceof Control)
 			{
-				Class<? extends XObject> xobj = anotations.type();
-				try {
-					XObject obj = xobj.newInstance();
+				Class<? extends XObject> xclass = anotations.type();
+				try
+				{
+					XObject obj = xclass.newInstance();
 					obj.setObject(anotations.label());
 					listaControl.add(obj);
 
-				} catch (InstantiationException | IllegalAccessException e) {
-					e.printStackTrace();
+					Action anotationsAction = variable.getAnnotation(Action.class);
+					if(anotationsAction != null && anotationsAction instanceof Action) {
+						try
+						{
+							XForm form = clase.newInstance();
+							Method metodo = clase.getMethod(anotationsAction.method());
+							obj.setMethodAndXForm(metodo,form);
+						}
+						catch(NoSuchMethodException|SecurityException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
 				}
-			}
-			
-			Action anotationsAction = variable.getAnnotation(Action.class);
-			
-			if(anotationsAction != null && anotationsAction instanceof Action)
-			{
-				try
-				{
-					Method metodo = clase.getMethod(anotationsAction.method());
-					XForm form = clase.newInstance();
-					metodo.invoke(form);
-				}
-				catch(NoSuchMethodException|SecurityException|IllegalAccessException|IllegalArgumentException|InvocationTargetException | InstantiationException  e)
+				catch(InstantiationException|IllegalAccessException e1)
 				{
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e1.printStackTrace();
 				}
 			}
 			
