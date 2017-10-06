@@ -144,9 +144,10 @@ public abstract class XForm implements ActionListener {
 				try
 				{
 					Method metodo = clase.getMethod(anotationsAction.method());
-					metodo.invoke(clase);
+					XForm form = clase.newInstance();
+					metodo.invoke(form);
 				}
-				catch(NoSuchMethodException|SecurityException|IllegalAccessException|IllegalArgumentException|InvocationTargetException  e)
+				catch(NoSuchMethodException|SecurityException|IllegalAccessException|IllegalArgumentException|InvocationTargetException | InstantiationException  e)
 				{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
