@@ -1,27 +1,17 @@
 package XObject;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 public class ComboBox extends XObject {
 
 	@Override
-	public void getObject() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void draw(JPanel panelCentral)
 	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setObject(String nombre)
-	{
-		// TODO Auto-generated method stub
-		
+		JCheckBox xcheck = new JCheckBox(nombre);
+		xcheck.addActionListener(this.getActionListener());
+		xcheck.setVisible(true);
+		panelCentral.add(xcheck);
 	}
 
 }

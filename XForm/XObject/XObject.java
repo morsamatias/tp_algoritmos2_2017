@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import XClass.XForm;
 
 public abstract class XObject implements XInterface {
+	String nombre;
 	Method metodo;
 	XForm form;
 	public void setMethodAndXForm(Method metodo, XForm form)
@@ -24,14 +25,19 @@ public abstract class XObject implements XInterface {
 			{
 				try
 				{
-					metodo.invoke(form);
+					if (metodo != null && form != null) {
+						metodo.invoke(form);
+					}
 				}
 				catch(IllegalAccessException|IllegalArgumentException|InvocationTargetException e1)
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}				
 			}
 		};
+	}
+	public void setObject(String nombre)
+	{
+		this.nombre = nombre;		
 	}
 }

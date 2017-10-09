@@ -6,14 +6,6 @@ import javax.swing.JPasswordField;
 
 public class TextPasswordField extends XObject {
 	
-	String nombre;
-
-	@Override
-	public void getObject() {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public void draw(JPanel panelCentral)
 	{
@@ -23,15 +15,7 @@ public class TextPasswordField extends XObject {
 		xtext.setColumns(10);
 		xtext.setVisible(true);
 		panelCentral.add(xlabel);
-		panelCentral.add(xtext);				
-	}
-
-	@Override
-	public void setObject(String nombre)
-	{
-		this.nombre = nombre;
-		// TODO Auto-generated method stub
-		
+		panelCentral.add(xtext);
 	}
 
 }
