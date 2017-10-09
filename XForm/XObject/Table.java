@@ -8,7 +8,6 @@ public class Table extends XObject {
 	public void draw(JPanel panelCentral)
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 }

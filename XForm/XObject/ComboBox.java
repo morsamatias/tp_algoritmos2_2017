@@ -11,10 +11,7 @@ public class ComboBox extends XObject {
 		JCheckBox xcheck = new JCheckBox(nombre);
 		xcheck.addActionListener(this.getActionListener());
 		xcheck.setVisible(true);
-		panelCentral.add(xcheck);		
-
-		// TODO Auto-generated method stub
-		
+		panelCentral.add(xcheck);
 	}
 
 }

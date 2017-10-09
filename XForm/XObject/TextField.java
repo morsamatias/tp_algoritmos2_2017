@@ -15,7 +15,7 @@ public class TextField extends XObject {
 		xtext.setColumns(10);
 		xtext.setVisible(true);
 		panelCentral.add(xlabel);
-		panelCentral.add(xtext);		
+		panelCentral.add(xtext);
 	}
   
 }

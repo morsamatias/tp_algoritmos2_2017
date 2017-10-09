@@ -31,7 +31,6 @@ public abstract class XObject implements XInterface {
 				}
 				catch(IllegalAccessException|IllegalArgumentException|InvocationTargetException e1)
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}				
 			}
@@ -39,8 +38,6 @@ public abstract class XObject implements XInterface {
 	}
 	public void setObject(String nombre)
 	{
-		this.nombre = nombre;
-		// TODO Auto-generated method stub
-		
+		this.nombre = nombre;		
 	}
 }

@@ -12,8 +12,6 @@ public class CheckBox extends XObject {
 		xcheck.addActionListener(this.getActionListener());
 		xcheck.setVisible(true);
 		panelCentral.add(xcheck);		
-		// TODO Auto-generated method stub
-		
 	}
 
 }
