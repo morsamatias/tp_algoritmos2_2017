@@ -6,16 +6,21 @@ import javax.swing.JTextArea;
 
 public class TextArea extends XObject {
 	
+	JLabel xlabel;
+	JTextArea xarea;
+	
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		JLabel xlabel = new JLabel(nombre);
-		JTextArea xtext = new JTextArea();
-//		xtext.addActionListener(this.getActionListener());
-		xtext.setSize(50, 100);
-		xtext.setVisible(true);
+		if (xarea == null) {
+			xlabel = new JLabel(nombre);
+			xarea = new JTextArea();
+//			xarea.addActionListener(this.getActionListener());
+			xarea.setSize(50, 100);
+			xarea.setVisible(true);
+		}
 		panelCentral.add(xlabel);
-		panelCentral.add(xtext);	
+		panelCentral.add(xarea);	
 		
 	}
 

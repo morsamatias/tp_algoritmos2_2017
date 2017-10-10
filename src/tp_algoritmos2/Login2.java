@@ -1,6 +1,5 @@
 package tp_algoritmos2;
 
-import XAnnotation.Action;
 import XAnnotation.BackButton;
 import XAnnotation.Control;
 import XAnnotation.Form;

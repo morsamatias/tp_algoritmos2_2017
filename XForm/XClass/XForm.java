@@ -27,7 +27,8 @@ public abstract class XForm implements ActionListener {
 	ArrayList<XObject> listaAction = new ArrayList<>();
 	ArrayList<String> listaFormNombre = new ArrayList<>();
 	ArrayList<XObject> listaSubmitButton = new ArrayList<>();
-	
+	ArrayList<XObject> listaControl = new ArrayList<>();
+
 	String backForm;
 	String nextForm ;
 	String formNombre;
@@ -35,6 +36,7 @@ public abstract class XForm implements ActionListener {
 	
 	Application frame = null;
 	Request request;
+	Boolean alreadyDraw = false;
 	
 	public void onLoad(Request request) {}
 	public boolean onSubmit(Request request) { return true; }
@@ -79,8 +81,7 @@ public abstract class XForm implements ActionListener {
 		Class<? extends XForm> clase = this.getClass();
 		Form[] anotations2 = clase.getAnnotationsByType(Form.class);
 		Field[] variables = clase.getDeclaredFields();
-		ArrayList<XObject> listaControl = new ArrayList<>();
-
+		
 		for(Form anotation:anotations2){
 			
 			if(anotation != null && anotation instanceof Form)
@@ -119,51 +120,54 @@ public abstract class XForm implements ActionListener {
 				nextForm = anotation.name();
 			}
 		}
-		for(Field variable:variables)
-		{
-			
-			Control anotations = variable.getAnnotation(Control.class);
-			
-			if(anotations != null && anotations instanceof Control)
+
+		if (!alreadyDraw) {
+			for(Field variable:variables)
 			{
-				Class<? extends XObject> xclass = anotations.type();
-				try
+				
+				Control anotations = variable.getAnnotation(Control.class);
+				
+				if(anotations != null && anotations instanceof Control)
 				{
-					XObject obj = xclass.newInstance();
-					obj.setObject(anotations.label());
-					listaControl.add(obj);
+					Class<? extends XObject> xclass = anotations.type();
+					try
+					{
+						XObject obj = xclass.newInstance();
+						obj.setObject(anotations.label());
+						listaControl.add(obj);
 
-					Action anotationsAction = variable.getAnnotation(Action.class);
-					if(anotationsAction != null && anotationsAction instanceof Action) {
-						try
-						{
-							XForm form = clase.newInstance();
-							Method metodo = clase.getMethod(anotationsAction.method());
-							obj.setMethodAndXForm(metodo,form);
-						}
-						catch(NoSuchMethodException|SecurityException e)
-						{
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						Action anotationsAction = variable.getAnnotation(Action.class);
+						if(anotationsAction != null && anotationsAction instanceof Action) {
+							try
+							{
+								XForm form = clase.newInstance();
+								Method metodo = clase.getMethod(anotationsAction.method());
+								obj.setMethodAndXForm(metodo,form);
+							}
+							catch(NoSuchMethodException|SecurityException e)
+							{
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
+						}
+					}
+					catch(InstantiationException|IllegalAccessException e1)
+					{
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}
-				catch(InstantiationException|IllegalAccessException e1)
+				
+				SubmitButton anotationsSubmitButton = variable.getAnnotation(SubmitButton.class);
+				
+				if(anotations != null && anotations instanceof SubmitButton)
 				{
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					TextField text = new TextField();
+					text.setObject(anotationsSubmitButton.label());
+					listaSubmitButton.add(text);
+				}	
 			}
-			
-			SubmitButton anotationsSubmitButton = variable.getAnnotation(SubmitButton.class);
-			
-			if(anotations != null && anotations instanceof SubmitButton)
-			{
-				TextField text = new TextField();
-				text.setObject(anotationsSubmitButton.label());
-				listaSubmitButton.add(text);
-			}	
 		}
 
 		app.setTitulo(formNombre);
@@ -173,6 +177,7 @@ public abstract class XForm implements ActionListener {
 		{
 			xobject.draw(app.getPanelCentral());
 		}
+		alreadyDraw = true;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
