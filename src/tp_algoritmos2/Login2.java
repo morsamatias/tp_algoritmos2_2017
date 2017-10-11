@@ -7,6 +7,7 @@ import XAnnotation.NextButton;
 import XClass.XForm;
 import XObject.CheckBox;
 import XObject.RadioBox;
+import XObject.Table;
 import XObject.TextField;
 
 @BackButton(name="Login")
@@ -25,6 +26,7 @@ public class Login2 extends XForm{
 	
 	@Control(label="Color", type=RadioBox.class)
 	private String amarillo;
+
 }
 
 

@@ -1,13 +1,24 @@
 package XObject;
 
+import java.util.Vector;
+
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 public class Table extends XObject {
+	
+	
+	JTable xtabla;
 
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		// TODO Auto-generated method stub
+		if (xtabla == null) {
+//			xarea.addActionListener(this.getActionListener());
+			xtabla.setSize(50, 100);
+			xtabla.setVisible(true);
+		}
+		panelCentral.add(xtabla);
 	}
 
 }
