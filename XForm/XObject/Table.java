@@ -1,7 +1,5 @@
 package XObject;
 
-import java.util.Vector;
-
 import javax.swing.JPanel;
 import javax.swing.JTable;
 

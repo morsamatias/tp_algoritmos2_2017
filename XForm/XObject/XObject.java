@@ -2,6 +2,7 @@ package XObject;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -11,6 +12,7 @@ public abstract class XObject implements XInterface {
 	String nombre;
 	Method metodo;
 	XForm form;
+	Field field;
 	public void setMethodAndXForm(Method metodo, XForm form)
 	{
 		this.metodo = metodo;
@@ -36,8 +38,18 @@ public abstract class XObject implements XInterface {
 			}
 		};
 	}
-	public void setObject(String nombre)
+	public void setName(String nombre)
 	{
 		this.nombre = nombre;		
+	}
+	
+	public void setField(Field field)
+	{
+		this.field = field;
+	}
+	
+	public void setForm(XForm form)
+	{
+		this.form = form;
 	}
 }

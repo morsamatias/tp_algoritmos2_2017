@@ -5,6 +5,7 @@ import XAnnotation.Control;
 import XAnnotation.Form;
 import XAnnotation.NextButton;
 import XClass.XForm;
+import XObject.ComboBox;
 import XObject.TextField;
 import XObject.TextPasswordField;
 
@@ -18,6 +19,9 @@ public class Login extends XForm{
 	@Action(label="Test2", method="test2")
 	@Control(label="Clave", type=TextPasswordField.class)
 	private String password;
+	
+	@Control(label="Area", type=ComboBox.class)
+	private String area;
 	
 	public void test()
 	{

@@ -133,14 +133,16 @@ public abstract class XForm implements ActionListener {
 					try
 					{
 						XObject obj = xclass.newInstance();
-						obj.setObject(anotations.label());
+						obj.setName(anotations.label());
+						obj.setField(variable);
+						XForm form = clase.newInstance();
+						obj.setForm(form);
 						listaControl.add(obj);
 
 						Action anotationsAction = variable.getAnnotation(Action.class);
 						if(anotationsAction != null && anotationsAction instanceof Action) {
 							try
 							{
-								XForm form = clase.newInstance();
 								Method metodo = clase.getMethod(anotationsAction.method());
 								obj.setMethodAndXForm(metodo,form);
 							}
@@ -164,7 +166,7 @@ public abstract class XForm implements ActionListener {
 				if(anotations != null && anotations instanceof SubmitButton)
 				{
 					TextField text = new TextField();
-					text.setObject(anotationsSubmitButton.label());
+					text.setName(anotationsSubmitButton.label());
 					listaSubmitButton.add(text);
 				}	
 			}
