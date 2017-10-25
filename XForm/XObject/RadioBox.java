@@ -1,5 +1,7 @@
 package XObject;
 
+import java.util.*;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,27 +10,28 @@ import javax.swing.JRadioButton;
 public class RadioBox extends XObject {
 	
 	String[] lista ;
+	List<JRadioButton> listaRadios = new ArrayList<JRadioButton>();
 	
-	JRadioButton xcheck = null;
+	JRadioButton xradio = null;
+	JLabel xlabel;
 	
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		if (xcheck == null) {
-			ButtonGroup grupo = new ButtonGroup();
+		ButtonGroup grupo = new ButtonGroup();
+		if (xradio == null) {
 			try
 			{
 				field.setAccessible(true);
 				lista = (String[]) field.get(form);
-				JLabel xlabel = new JLabel(nombre);
-				panelCentral.add(xlabel);
+				xlabel = new JLabel(nombre);
 				for(String string:lista)
 				{
-					xcheck = new JRadioButton(string);
-					xcheck.addActionListener(this.getActionListener());
-					xcheck.setVisible(true);
-					grupo.add(xcheck);
-					panelCentral.add(xcheck);
+					xradio = new JRadioButton(string);
+					xradio.addActionListener(this.getActionListener());
+					xradio.setVisible(true);
+					grupo.add(xradio);
+					listaRadios.add(xradio);
 				}
 			}
 			catch(IllegalArgumentException|IllegalAccessException e)
@@ -36,6 +39,11 @@ public class RadioBox extends XObject {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		panelCentral.add(xlabel);
+		for(JRadioButton jRadioButton:listaRadios)
+		{
+			panelCentral.add(jRadioButton);
 		}
 	}
 
