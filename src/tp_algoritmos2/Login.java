@@ -16,6 +16,7 @@ public class Login extends XForm{
 	@Action(label="Test", method="test")
 	@Control(label="Usuario", type=TextField.class)
 	private String user;
+	
 	@Action(label="Test2", method="test2")
 	@Control(label="Clave", type=TextPasswordField.class)
 	private String password;
