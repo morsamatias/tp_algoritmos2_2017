@@ -29,7 +29,6 @@ public class RadioBox extends XObject {
 				{
 					xradio = new JRadioButton(string);
 					xradio.addActionListener(this.getActionListener());
-					xradio.setVisible(true);
 					grupo.add(xradio);
 					listaRadios.add(xradio);
 				}

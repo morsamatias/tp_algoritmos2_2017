@@ -1,13 +1,8 @@
 package tp_algoritmos2;
 
-import XAnnotation.Action;
-import XAnnotation.Control;
-import XAnnotation.Form;
-import XAnnotation.NextButton;
+import XAnnotation.*;
 import XClass.XForm;
-import XObject.ComboBox;
-import XObject.TextField;
-import XObject.TextPasswordField;
+import XObject.*;
 
 @NextButton(name="Login2")
 @Form(name="Login", title="Pantalla de inicio")
@@ -21,7 +16,7 @@ public class Login extends XForm{
 	@Control(label="Clave", type=TextPasswordField.class)
 	private String password;
 	
-	@Control(label="Area", type=ComboBox.class)
+	@Control(label="Area", type=TextArea.class)
 	private String area;
 	
 	public void test()

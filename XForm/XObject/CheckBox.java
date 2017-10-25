@@ -13,7 +13,6 @@ public class CheckBox extends XObject {
 		if(xcheck == null){
 			xcheck = new JCheckBox(nombre);
 			xcheck.addActionListener(this.getActionListener());
-			xcheck.setVisible(true);		
 		}
 		panelCentral.add(xcheck);
 	}

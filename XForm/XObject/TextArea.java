@@ -14,10 +14,8 @@ public class TextArea extends XObject {
 	{
 		if (xarea == null) {
 			xlabel = new JLabel(nombre);
-			xarea = new JTextArea();
+			xarea = new JTextArea(10,30);
 //			xarea.addActionListener(this.getActionListener());
-			xarea.setSize(50, 100);
-			xarea.setVisible(true);
 		}
 		panelCentral.add(xlabel);
 		panelCentral.add(xarea);	

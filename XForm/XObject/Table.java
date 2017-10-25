@@ -23,15 +23,14 @@ public class Table extends XObject implements TableModelListener {
 			try
 			{
 				datos = (String[][]) field.get(form);
-				String[] primerElemento = datos[0];
+				String[] primeraFila = datos[0];
 				List<String> columnas = new ArrayList<>();
-				for(int i=0; i<primerElemento.length; i++)
+				for(int i=0; i<primeraFila.length; i++)
 				{
 					columnas.add("Columna" + i);					
 				}
 				xtabla = new JTable(datos, columnas.toArray());
 				xtabla.getModel().addTableModelListener(this);
-				xtabla.setVisible(true);
 			}
 			catch(IllegalArgumentException|IllegalAccessException e)
 			{

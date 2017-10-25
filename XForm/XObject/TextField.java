@@ -17,7 +17,6 @@ public class TextField extends XObject {
 			xtext = new JTextField();
 			xtext.addActionListener(this.getActionListener());
 			xtext.setColumns(10);
-			xtext.setVisible(true);
 		}
 		panelCentral.add(xlabel);
 		panelCentral.add(xtext);
