@@ -1,6 +1,7 @@
 package XObject;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -19,6 +20,8 @@ public class RadioBox extends XObject {
 			{
 				field.setAccessible(true);
 				lista = (String[]) field.get(form);
+				JLabel xlabel = new JLabel(nombre);
+				panelCentral.add(xlabel);
 				for(String string:lista)
 				{
 					xcheck = new JRadioButton(string);
