@@ -4,8 +4,9 @@ import XAnnotation.*;
 import XClass.XForm;
 import XObject.*;
 
-@NextButton(name="Login2")
-@Form(name="Login", title="Pantalla de inicio")
+@NextButton(label="Login", next="Login2")
+@BackButton(label="Cerrar", name="Cierra")
+@Form(name="Login", title="Inicio de sesión")
 public class Login extends XForm{
 
 	@Action(label="Test", method="test")
@@ -13,12 +14,9 @@ public class Login extends XForm{
 	private String user;
 	
 	@Action(label="Test2", method="test2")
-	@Control(label="Clave", type=TextPasswordField.class)
+	@Control(label="Password", type=TextPasswordField.class)
 	private String password;
-	
-	@Control(label="Area", type=TextArea.class)
-	private String area;
-	
+		
 	public void test()
 	{
 		System.out.println("Metodo de prueba 1");
