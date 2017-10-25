@@ -6,7 +6,7 @@ import javax.swing.JRadioButton;
 
 public class RadioBox extends XObject {
 	
-	String [] lista ;
+	String[] lista ;
 	
 	JRadioButton xcheck = null;
 	
@@ -17,6 +17,7 @@ public class RadioBox extends XObject {
 			ButtonGroup grupo = new ButtonGroup();
 			try
 			{
+				field.setAccessible(true);
 				lista = (String[]) field.get(form);
 				for(String string:lista)
 				{
