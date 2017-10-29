@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 import XObject.XObject;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+//@Target(ElementType.FIELD)
 public @interface Control {
 	String label();
 	Class<? extends XObject> type();
