@@ -33,18 +33,19 @@ public class Login2 extends XForm{
 	@Control(label="1 hijo", type=CheckBox.class)
 	private String hijo1 ;
 	
-	@Action(label="Test3", method="test3")
 	@Control(label="2 o mas hijos", type=CheckBox.class)
 	private String[] hijo2 ;
-
-	@Control(label="Tabla", type=Table.class)
-	private String[][] tabla = {{"Especialista","Fecha","Consideraciones"}};
 	
+	@Action(label="Test3", method="test3")
+	@Control(label="Especialidad", type=ComboBox.class)
+	private String[] tabla = {"Seleccionar especialidad","Especialista1","Especialista2"};
+	
+	@Control(label="Turnos disponibles", type=Table.class) 
+	public String[][] tabla2 = {{"Turno1","Fecha1","Consideracion1"},{"Turno2","Fecha2","Consideracion2"}};
+
 	public void test3()
 	{
 		System.out.println("Metodo de prueba 3");
-		//@Control(label="Tabla2", type=Table.class) 
-		//public String[][] tabla2 = {{"Especialista","Fecha","Consideraciones"},{"Especialista","Fecha","Consideraciones"}};
 		//No anda esta annotation
 	}
 
