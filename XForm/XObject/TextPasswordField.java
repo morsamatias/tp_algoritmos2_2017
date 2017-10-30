@@ -12,9 +12,19 @@ public class TextPasswordField extends XObject {
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		xlabel = new JLabel(nombre);
-		xpass = new JPasswordField(10);
-		xpass.addActionListener(this.getActionListener());
+		field.setAccessible(true);
+		try
+		{
+			xlabel = new JLabel(nombre);
+			xpass = new JPasswordField(10);
+			String datos = (String) field.get(form);
+			xpass.setText(datos);
+			xpass.addActionListener(this.getActionListener());
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
 		panelCentral.add(xlabel);
 		panelCentral.add(xpass);
 	}

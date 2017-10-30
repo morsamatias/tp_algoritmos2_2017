@@ -27,7 +27,7 @@ public abstract class XForm implements ActionListener {
 	ArrayList<XObject> listaAction = new ArrayList<>();
 	ArrayList<String> listaFormNombre = new ArrayList<>();
 	ArrayList<XObject> listaSubmitButton = new ArrayList<>();
-	ArrayList<XObject> listaControl = new ArrayList<>();
+	ArrayList<XObject> listaControl;
 
 	String backForm;
 	String nextForm ;
@@ -42,11 +42,19 @@ public abstract class XForm implements ActionListener {
 	
 	public void onLoad(Request request) {}
 	public boolean onSubmit() { return true; }
-	public void onBack() {}
-	
-	public XForm(Application app)
+	public boolean onBack() { return true; }
+		
+	public Application getFrame() {
+		return frame;
+	}
+	public void setFrame(Application frame) {
+		this.frame = frame;
+		reloadAllFields();
+	}
+
+	private void reloadAllFields()
 	{
-		setFrame(app);
+		listaControl = new ArrayList<>();
 		Class<? extends XForm> clase = this.getClass();
 		Form[] anotations2 = clase.getAnnotationsByType(Form.class);
 		Field[] variables = clase.getDeclaredFields();
@@ -89,7 +97,6 @@ public abstract class XForm implements ActionListener {
 
 		for(Field variable:variables)
 		{
-			
 			Control anotations = variable.getAnnotation(Control.class);
 			
 			if(anotations != null && anotations instanceof Control)
@@ -111,7 +118,6 @@ public abstract class XForm implements ActionListener {
 				}
 				catch(InstantiationException|IllegalAccessException|NoSuchMethodException|SecurityException e1)
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -127,13 +133,6 @@ public abstract class XForm implements ActionListener {
 		}
 	}
 	
-	public Application getFrame() {
-		return frame;
-	}
-	public void setFrame(Application frame) {
-		this.frame = frame;
-	}
-
 	public String getNombre() {
 		Class<? extends XForm> clase = this.getClass();
 		
@@ -163,6 +162,7 @@ public abstract class XForm implements ActionListener {
 	public void redraw()
 	{
 		getFrame().limpiaForm();
+		reloadAllFields();
 		draw();
 	}
 	
@@ -186,14 +186,11 @@ public abstract class XForm implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		saveFields();
-		if ("siguiente".equals(e.getActionCommand())) {
-			if(onSubmit())
-			{
-				getFrame().limpiaForm();
-				getFrame().showForm(nextForm);
-			}
+		if ("siguiente".equals(e.getActionCommand()) && onSubmit()) {
+			getFrame().limpiaForm();
+			getFrame().showForm(nextForm);
 		}else{
-			if("anterior".equals(e.getActionCommand())){
+			if("anterior".equals(e.getActionCommand()) && onBack()){
 				getFrame().limpiaForm();
 				getFrame().showForm(backForm);
 			}
@@ -205,7 +202,7 @@ public abstract class XForm implements ActionListener {
 		return listaControl.stream().filter(o -> o.getNombre() == nombre).findFirst();
 	}
 	
-	private void saveFields()
+	public void saveFields()
 	{
 		Class<? extends XForm> clase = this.getClass();
 		Field[] variables = clase.getDeclaredFields();
@@ -222,13 +219,10 @@ public abstract class XForm implements ActionListener {
 				}
 				catch(IllegalArgumentException|IllegalAccessException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		}
-
-		// TODO Auto-generated method stub
 
 	}
 }

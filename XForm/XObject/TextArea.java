@@ -14,7 +14,17 @@ public class TextArea extends XObject {
 	{
 		xlabel = new JLabel(nombre);
 		xarea = new JTextArea(10,30);
-//		xarea.addActionListener(this.getActionListener());
+		try
+		{
+			String datos = (String) field.get(form);
+			xarea.setText(datos);
+//			xarea.addActionListener(this.getActionListener());
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		panelCentral.add(xlabel);
 		panelCentral.add(xarea);	
 	}

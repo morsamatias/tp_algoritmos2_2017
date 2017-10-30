@@ -1,7 +1,6 @@
 package tp_algoritmos2;
 
 import XAnnotation.*;
-import XApplication.Application;
 import XClass.XForm;
 import XObject.*;
 
@@ -9,12 +8,6 @@ import XObject.*;
 @NextButton(label="Login", next="Login")
 @Form(name="Turnos", title="Pantalla de inicio")
 public class FormTurnos extends XForm{
-	
-	public FormTurnos(Application app)
-	{
-		super(app);
-		// TODO Auto-generated constructor stub
-	}
 
 	@Control(label="Nombre", type=TextField.class)
 	private String nombre;
@@ -35,13 +28,13 @@ public class FormTurnos extends XForm{
 	private String[] sex = {"Masculino", "Femenino"};
 	
 	@Control(label="Esposa", type=CheckBox.class)
-	private Boolean esposa;
+	private boolean esposa;
 
 	@Control(label="1 hijo", type=CheckBox.class)
-	private Boolean hijo1 ;
+	private boolean hijo1;
 	
 	@Control(label="2 o mas hijos", type=CheckBox.class)
-	private Boolean hijo2 ;
+	private boolean hijo2;
 	
 	@Action(label="Test3", method="test3")
 	@Control(label="Especialidad", type=ComboBox.class)
@@ -55,8 +48,9 @@ public class FormTurnos extends XForm{
 	
 	public void test3()
 	{
-		System.out.println("Metodo de prueba 3");
+		saveFields();
 		turnos = new String[][]{{"Especialidad1", "Fecha1"}, {"Especialidad2", "Fecha2"}};
+//		nombre = "pepe";
 		redraw();
 	}
 

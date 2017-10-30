@@ -1,7 +1,6 @@
 package XApplication;
 
 import java.awt.BorderLayout;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Hashtable;
 
 import javax.swing.JFrame;
@@ -11,7 +10,6 @@ import XObject.XObject;
 import tp_algoritmos2.Demo.EscuchaApp;
 
 public class Application {
-	
 	
 	private int width = 400;
 	private int height = 400;
@@ -43,10 +41,10 @@ public class Application {
 	// Agrega el formulario a nuestra tabla que los almacena
 	public void registerFrom(Class<? extends XForm> formClass) {
 		try {
-			XForm form = formClass.getDeclaredConstructor(Application.class).newInstance(this);
-//			XForm form = formClass.newInstance();
+			XForm form = formClass.newInstance();
+			form.setFrame(this);
 			forms.put(form.getNombre(), form);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
 			e.printStackTrace();
 		}
 	}

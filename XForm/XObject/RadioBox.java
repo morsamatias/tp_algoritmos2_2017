@@ -10,14 +10,16 @@ import javax.swing.JRadioButton;
 public class RadioBox extends XObject {
 	
 	String[] lista ;
-	List<JRadioButton> listaRadios = new ArrayList<JRadioButton>();
+	List<JRadioButton> listaRadios;
 	
 	JRadioButton xradio = null;
 	JLabel xlabel;
+	int lastSelected;
 	
 	@Override
 	public void draw(JPanel panelCentral)
 	{
+		listaRadios = new ArrayList<JRadioButton>();
 		ButtonGroup grupo = new ButtonGroup();
 		try
 		{
@@ -34,7 +36,6 @@ public class RadioBox extends XObject {
 		}
 		catch(IllegalArgumentException|IllegalAccessException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		panelCentral.add(xlabel);

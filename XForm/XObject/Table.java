@@ -33,7 +33,6 @@ public class Table extends XObject implements TableModelListener {
 		}
 		catch(IllegalArgumentException|IllegalAccessException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		panelCentral.add(xtabla);

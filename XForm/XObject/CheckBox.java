@@ -10,8 +10,18 @@ public class CheckBox extends XObject {
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		xcheck = new JCheckBox(nombre);
-		xcheck.addActionListener(this.getActionListener());
+		field.setAccessible(true);
+		try
+		{
+			xcheck = new JCheckBox(nombre);
+			boolean datos = (Boolean) field.get(form);
+			xcheck.setSelected(datos);
+			xcheck.addActionListener(this.getActionListener());
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
 		panelCentral.add(xcheck);
 	}
 

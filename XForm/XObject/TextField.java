@@ -12,10 +12,20 @@ public class TextField extends XObject {
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		xlabel = new JLabel(nombre);
-		xtext = new JTextField();
-		xtext.addActionListener(this.getActionListener());
-		xtext.setColumns(10);
+		field.setAccessible(true);
+		try
+		{
+			xlabel = new JLabel(nombre);
+			xtext = new JTextField();
+			String datos = (String) field.get(form);
+			xtext.setText(datos);
+			xtext.addActionListener(this.getActionListener());
+			xtext.setColumns(10);
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
 		panelCentral.add(xlabel);
 		panelCentral.add(xtext);
 	}
