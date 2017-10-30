@@ -12,11 +12,9 @@ public class TextPasswordField extends XObject {
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		if (xpass == null) {
-			xlabel = new JLabel(nombre);
-			xpass = new JPasswordField(10);
-			xpass.addActionListener(this.getActionListener());
-		}
+		xlabel = new JLabel(nombre);
+		xpass = new JPasswordField(10);
+		xpass.addActionListener(this.getActionListener());
 		panelCentral.add(xlabel);
 		panelCentral.add(xpass);
 	}

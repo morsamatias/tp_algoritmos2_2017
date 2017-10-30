@@ -23,7 +23,6 @@ import XObject.TextField;
 import XObject.XObject;
 
 public abstract class XForm implements ActionListener {
-	ArrayList<XObject> components = new ArrayList<>();
 	
 	ArrayList<XObject> listaAction = new ArrayList<>();
 	ArrayList<String> listaFormNombre = new ArrayList<>();
@@ -35,13 +34,98 @@ public abstract class XForm implements ActionListener {
 	String formNombre;
 	String nombre;
 	
+	JButton buttonBack = null;
+	JButton buttonNext = null;
+	
 	Application frame = null;
 	Request request;
-	Boolean alreadyDraw = false;
 	
 	public void onLoad(Request request) {}
 	public boolean onSubmit() { return true; }
 	public void onBack() {}
+	
+	public XForm(Application app)
+	{
+		setFrame(app);
+		Class<? extends XForm> clase = this.getClass();
+		Form[] anotations2 = clase.getAnnotationsByType(Form.class);
+		Field[] variables = clase.getDeclaredFields();
+		
+		for(Form anotation:anotations2){
+			
+			if(anotation != null && anotation instanceof Form)
+			{	
+				formNombre = anotation.title();
+				nombre = anotation.name();
+			}
+		
+		}
+		
+		NextButton[] anotations3 = clase.getAnnotationsByType(NextButton.class);
+		
+		for(NextButton anotation:anotations3){
+			if((anotation != null) && anotation instanceof NextButton)
+			{
+				buttonNext = new JButton(anotation.label());
+				buttonNext.setActionCommand("siguiente");
+				buttonNext.setMnemonic(KeyEvent.VK_D);
+				buttonNext.addActionListener(this);
+				nextForm = anotation.next();
+			}
+		}
+		
+		BackButton[] anotations4 = clase.getAnnotationsByType(BackButton.class);
+		
+		for(BackButton anotation:anotations4){
+			if(anotation != null && anotation instanceof BackButton)
+			{
+				buttonBack = new JButton(anotation.label());
+				buttonBack.setActionCommand("anterior");
+				buttonBack.setMnemonic(KeyEvent.VK_L);
+				buttonBack.addActionListener(this);
+				backForm = anotation.name();
+			}
+		}
+
+		for(Field variable:variables)
+		{
+			
+			Control anotations = variable.getAnnotation(Control.class);
+			
+			if(anotations != null && anotations instanceof Control)
+			{
+				Class<? extends XObject> xclass = anotations.type();
+				try
+				{
+					XObject obj = xclass.newInstance();
+					obj.setName(anotations.label());
+					obj.setField(variable);
+					obj.setForm(this);
+					listaControl.add(obj);
+
+					Action anotationsAction = variable.getAnnotation(Action.class);
+					if(anotationsAction != null && anotationsAction instanceof Action) {
+						Method metodo = clase.getMethod(anotationsAction.method());
+						obj.setMethodAndXForm(metodo, this);
+					}
+				}
+				catch(InstantiationException|IllegalAccessException|NoSuchMethodException|SecurityException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+			SubmitButton anotationsSubmitButton = variable.getAnnotation(SubmitButton.class);
+			
+			if(anotations != null && anotations instanceof SubmitButton)
+			{
+				TextField text = new TextField();
+				text.setName(anotationsSubmitButton.label());
+				listaSubmitButton.add(text);
+			}	
+		}
+	}
 	
 	public Application getFrame() {
 		return frame;
@@ -76,110 +160,28 @@ public abstract class XForm implements ActionListener {
 		this.request = request;
 	}
 	
-	// Dado el frame, agrega todos los componentes y los dibuja
-	public void draw(Application app) {
-		setFrame(app);
-		Class<? extends XForm> clase = this.getClass();
-		Form[] anotations2 = clase.getAnnotationsByType(Form.class);
-		Field[] variables = clase.getDeclaredFields();
-		
-		for(Form anotation:anotations2){
-			
-			if(anotation != null && anotation instanceof Form)
-			{	
-				formNombre = anotation.title();
-				nombre = anotation.name();
-			}
-		
-		}
-		
-		NextButton[] anotations3 = clase.getAnnotationsByType(NextButton.class);
-		
-		for(NextButton anotation:anotations3){
-			if((anotation != null) && anotation instanceof NextButton)
-			{
-				JButton buttonNext = new JButton(anotation.label());
-				buttonNext.setActionCommand("siguiente");
-				buttonNext.setMnemonic(KeyEvent.VK_D);
-				buttonNext.addActionListener(this);
-				app.getPanelSur().add(buttonNext);
-				nextForm = anotation.next();
-			}
-		}
-		
-		BackButton[] anotations4 = clase.getAnnotationsByType(BackButton.class);
-		
-		for(BackButton anotation:anotations4){
-			if(anotation != null && anotation instanceof BackButton)
-			{
-				JButton buttonBack = new JButton(anotation.label());
-				buttonBack.setActionCommand("anterior");
-				buttonBack.setMnemonic(KeyEvent.VK_L);
-				buttonBack.addActionListener(this);
-				app.getPanelSur().add(buttonBack);
-				backForm = anotation.name();
-			}
-		}
+	public void redraw()
+	{
+		getFrame().limpiaForm();
+		draw();
+	}
+	
+	public void draw() {
 
-		if (!alreadyDraw) {
-			for(Field variable:variables)
-			{
-				
-				Control anotations = variable.getAnnotation(Control.class);
-				
-				if(anotations != null && anotations instanceof Control)
-				{
-					Class<? extends XObject> xclass = anotations.type();
-					try
-					{
-						XObject obj = xclass.newInstance();
-						obj.setName(anotations.label());
-						obj.setField(variable);
-						XForm form = clase.newInstance();
-						obj.setForm(form);
-						listaControl.add(obj);
-
-						Action anotationsAction = variable.getAnnotation(Action.class);
-						if(anotationsAction != null && anotationsAction instanceof Action) {
-							try
-							{
-								Method metodo = clase.getMethod(anotationsAction.method());
-								obj.setMethodAndXForm(metodo,form);
-							}
-							catch(NoSuchMethodException|SecurityException e)
-							{
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-
-						}
-					}
-					catch(InstantiationException|IllegalAccessException e1)
-					{
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-				
-				SubmitButton anotationsSubmitButton = variable.getAnnotation(SubmitButton.class);
-				
-				if(anotations != null && anotations instanceof SubmitButton)
-				{
-					TextField text = new TextField();
-					text.setName(anotationsSubmitButton.label());
-					listaSubmitButton.add(text);
-				}	
-			}
-		}
-
-		app.setTitulo(formNombre);
-		
-		//Le pido que se dibuje		
+		getFrame().setTitulo(formNombre);
+		//Le pido que se dibuje
 		for(XObject xobject:listaControl)
 		{
-			xobject.draw(app.getPanelCentral());
+			xobject.draw(getFrame().getPanelCentral());
 		}
-		alreadyDraw = true;
+		if(buttonNext != null)
+		{
+			getFrame().getPanelSur().add(buttonNext);
+		}
+		if(buttonBack != null)
+		{
+			getFrame().getPanelSur().add(buttonBack);
+		}
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -197,7 +199,7 @@ public abstract class XForm implements ActionListener {
 			}
 		}
 	}
-	
+		
 	private Optional<XObject> getXObject(String nombre)
 	{
 		return listaControl.stream().filter(o -> o.getNombre() == nombre).findFirst();

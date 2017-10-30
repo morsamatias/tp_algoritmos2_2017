@@ -19,25 +19,23 @@ public class RadioBox extends XObject {
 	public void draw(JPanel panelCentral)
 	{
 		ButtonGroup grupo = new ButtonGroup();
-		if (xradio == null) {
-			try
+		try
+		{
+			field.setAccessible(true);
+			lista = (String[]) field.get(form);
+			xlabel = new JLabel(nombre);
+			for(String string:lista)
 			{
-				field.setAccessible(true);
-				lista = (String[]) field.get(form);
-				xlabel = new JLabel(nombre);
-				for(String string:lista)
-				{
-					xradio = new JRadioButton(string);
-					xradio.addActionListener(this.getActionListener());
-					grupo.add(xradio);
-					listaRadios.add(xradio);
-				}
+				xradio = new JRadioButton(string);
+				xradio.addActionListener(this.getActionListener());
+				grupo.add(xradio);
+				listaRadios.add(xradio);
 			}
-			catch(IllegalArgumentException|IllegalAccessException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		panelCentral.add(xlabel);
 		for(JRadioButton jRadioButton:listaRadios)

@@ -18,25 +18,23 @@ public class Table extends XObject implements TableModelListener {
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		if (xtabla == null) {
-			field.setAccessible(true);
-			try
+		field.setAccessible(true);
+		try
+		{
+			datos = (String[][]) field.get(form);
+			String[] primeraFila = datos[0];
+			List<String> columnas = new ArrayList<>();
+			for(int i=0; i<primeraFila.length; i++)
 			{
-				datos = (String[][]) field.get(form);
-				String[] primeraFila = datos[0];
-				List<String> columnas = new ArrayList<>();
-				for(int i=0; i<primeraFila.length; i++)
-				{
-					columnas.add("Columna" + i);					
-				}
-				xtabla = new JTable(datos, columnas.toArray());
-				xtabla.getModel().addTableModelListener(this);
+				columnas.add("Columna" + i);					
 			}
-			catch(IllegalArgumentException|IllegalAccessException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			xtabla = new JTable(datos, columnas.toArray());
+			xtabla.getModel().addTableModelListener(this);
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		panelCentral.add(xtabla);
 	}

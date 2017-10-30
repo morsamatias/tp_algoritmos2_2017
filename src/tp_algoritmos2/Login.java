@@ -1,6 +1,7 @@
 package tp_algoritmos2;
 
 import XAnnotation.*;
+import XApplication.Application;
 import XClass.XForm;
 import XObject.*;
 
@@ -8,6 +9,12 @@ import XObject.*;
 @BackButton(label="Cerrar", name="Cierra")
 @Form(name="Login", title="Inicio de sesión")
 public class Login extends XForm{
+
+	public Login(Application app)
+	{
+		super(app);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Action(label="Test", method="test")
 	@Control(label="Usuario", type=TextField.class)

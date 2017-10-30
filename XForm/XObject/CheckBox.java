@@ -5,15 +5,13 @@ import javax.swing.JPanel;
 
 public class CheckBox extends XObject {
 
-	JCheckBox xcheck = null;
+	JCheckBox xcheck;
 	
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		if(xcheck == null){
-			xcheck = new JCheckBox(nombre);
-			xcheck.addActionListener(this.getActionListener());
-		}
+		xcheck = new JCheckBox(nombre);
+		xcheck.addActionListener(this.getActionListener());
 		panelCentral.add(xcheck);
 	}
 

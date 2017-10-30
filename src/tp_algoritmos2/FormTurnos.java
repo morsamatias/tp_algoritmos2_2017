@@ -1,6 +1,7 @@
 package tp_algoritmos2;
 
 import XAnnotation.*;
+import XApplication.Application;
 import XClass.XForm;
 import XObject.*;
 
@@ -9,6 +10,12 @@ import XObject.*;
 @Form(name="Turnos", title="Pantalla de inicio")
 public class FormTurnos extends XForm{
 	
+	public FormTurnos(Application app)
+	{
+		super(app);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Control(label="Nombre", type=TextField.class)
 	private String nombre;
 	
@@ -49,7 +56,8 @@ public class FormTurnos extends XForm{
 	public void test3()
 	{
 		System.out.println("Metodo de prueba 3");
-		//No anda esta annotation
+		turnos = new String[][]{{"Especialidad1", "Fecha1"}, {"Especialidad2", "Fecha2"}};
+		redraw();
 	}
 
 }

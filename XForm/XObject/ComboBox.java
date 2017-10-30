@@ -13,20 +13,17 @@ public class ComboBox extends XObject {
 	@Override
 	public void draw(JPanel panelCentral)
 	{
-		if(xcheck == null){
-			try
-			{
-				field.setAccessible(true);
-				lista = (String[]) field.get(form);
-				xcheck = new JComboBox(lista);
-				xcheck.addActionListener(this.getActionListener());
-			}
-			catch(IllegalArgumentException|IllegalAccessException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		try
+		{
+			field.setAccessible(true);
+			lista = (String[]) field.get(form);
+			xcheck = new JComboBox(lista);
+			xcheck.addActionListener(this.getActionListener());
+		}
+		catch(IllegalArgumentException|IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		panelCentral.add(xcheck);
 	}

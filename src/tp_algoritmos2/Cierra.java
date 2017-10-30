@@ -7,7 +7,13 @@ import XClass.XForm;
 @Form(name="Cierra", title="Cierra")
 public class Cierra extends XForm
 {
-	public void draw(Application app)
+	public Cierra(Application app)
+	{
+		super(app);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void draw()
 	{
 		System.exit(0);
 	}
