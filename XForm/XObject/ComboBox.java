@@ -31,4 +31,10 @@ public class ComboBox extends XObject {
 		panelCentral.add(xcheck);
 	}
 
+	@Override
+	public String[] getValue()
+	{
+		return lista;
+	}
+
 }

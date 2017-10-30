@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.swing.JButton;
 
@@ -39,7 +40,7 @@ public abstract class XForm implements ActionListener {
 	Boolean alreadyDraw = false;
 	
 	public void onLoad(Request request) {}
-	public boolean onSubmit(Request request) { return true; }
+	public boolean onSubmit() { return true; }
 	public void onBack() {}
 	
 	public Application getFrame() {
@@ -182,14 +183,50 @@ public abstract class XForm implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		saveFields();
 		if ("siguiente".equals(e.getActionCommand())) {
-			getFrame().limpiaForm();
-			getFrame().showForm(nextForm);
+			if(onSubmit())
+			{
+				getFrame().limpiaForm();
+				getFrame().showForm(nextForm);
+			}
 		}else{
 			if("anterior".equals(e.getActionCommand())){
 				getFrame().limpiaForm();
 				getFrame().showForm(backForm);
 			}
 		}
+	}
+	
+	private Optional<XObject> getXObject(String nombre)
+	{
+		return listaControl.stream().filter(o -> o.getNombre() == nombre).findFirst();
+	}
+	
+	private void saveFields()
+	{
+		Class<? extends XForm> clase = this.getClass();
+		Field[] variables = clase.getDeclaredFields();
+		for(Field variable:variables)
+		{
+			Control anotations = variable.getAnnotation(Control.class);
+			if(anotations != null && anotations instanceof Control)
+			{
+				try
+				{
+					Optional<XObject> xobj = getXObject(anotations.label());
+					variable.setAccessible(true);
+					variable.set(this, xobj.get().getValue());
+				}
+				catch(IllegalArgumentException|IllegalAccessException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// TODO Auto-generated method stub
+
 	}
 }

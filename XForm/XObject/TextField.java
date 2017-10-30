@@ -21,5 +21,12 @@ public class TextField extends XObject {
 		panelCentral.add(xlabel);
 		panelCentral.add(xtext);
 	}
+
+	@Override
+	public String getValue()
+	{
+		return xtext.getText();
+		
+	}
   
 }

@@ -17,4 +17,10 @@ public class CheckBox extends XObject {
 		panelCentral.add(xcheck);
 	}
 
+	@Override
+	public Boolean getValue()
+	{
+		return xcheck.isSelected();
+	}
+
 }

@@ -52,4 +52,9 @@ public abstract class XObject implements XInterface {
 	{
 		this.form = form;
 	}
+	
+	public String getNombre()
+	{
+		return this.nombre;
+	}
 }

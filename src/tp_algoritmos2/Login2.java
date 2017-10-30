@@ -14,7 +14,7 @@ public class Login2 extends XForm{
 	
 	@Action(label="Test3", method="test3")
 	@Control(label="Hombre?", type=CheckBox.class)
-	private String hombre;
+	private Boolean hombre;
 	
 	@Control(label="Color", type=RadioBox.class)
 	private String[] color = {"Rojo", "Amarillo"};

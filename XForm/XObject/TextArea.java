@@ -19,7 +19,12 @@ public class TextArea extends XObject {
 		}
 		panelCentral.add(xlabel);
 		panelCentral.add(xarea);	
-		
+	}
+
+	@Override
+	public String getValue()
+	{
+		return xarea.getText();
 	}
 
 }

@@ -21,4 +21,10 @@ public class TextPasswordField extends XObject {
 		panelCentral.add(xpass);
 	}
 
+	@Override
+	public String getValue()
+	{
+		return new String(xpass.getPassword());
+	}
+
 }

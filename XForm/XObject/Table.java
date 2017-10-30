@@ -57,4 +57,10 @@ public class Table extends XObject implements TableModelListener {
 		
 	}
 
+	@Override
+	public String[][] getValue()
+	{
+		return datos;
+	}
+
 }

@@ -46,4 +46,10 @@ public class RadioBox extends XObject {
 		}
 	}
 
+	@Override
+	public String[] getValue()
+	{
+		return lista;
+	}
+
 }
