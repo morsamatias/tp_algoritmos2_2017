@@ -8,7 +8,7 @@ public class Demo {
 	public static void main(String[] args) {
 		Application app = new Application(new EscuchaApp());
 		app.registerFrom(Login.class);
-		app.registerFrom(Login2.class);
+		app.registerFrom(FormTurnos.class);
 		app.registerFrom(Cierra.class);
 		app.showForm("Login");
 	}

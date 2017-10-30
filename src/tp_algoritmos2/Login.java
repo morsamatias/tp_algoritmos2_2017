@@ -4,7 +4,7 @@ import XAnnotation.*;
 import XClass.XForm;
 import XObject.*;
 
-@NextButton(label="Login", next="Login2")
+@NextButton(label="Login", next="Turnos")
 @BackButton(label="Cerrar", name="Cierra")
 @Form(name="Login", title="Inicio de sesión")
 public class Login extends XForm{
