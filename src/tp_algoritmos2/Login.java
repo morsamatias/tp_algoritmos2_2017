@@ -6,10 +6,10 @@ import XObject.*;
 
 @NextButton(label="Login", next="Turnos")
 @BackButton(label="Cerrar", name="Cierra")
-@Form(name="Login", title="Inicio de sesión")
+@Form(name="Login", title="Inicio de sesiï¿½n")
 public class Login extends XForm{
 
-	@Action(label="Test", method="test")
+//	@Action(label="Test", method="test")
 	@Control(label="Usuario", type=TextField.class)
 	private String user;
 	
@@ -33,7 +33,7 @@ public class Login extends XForm{
 		this.password=password;
 	}
 
-	@Action(label="Test2", method="test2")
+//	@Action(label="Test2", method="test2")
 	@Control(label="Password", type=TextPasswordField.class)
 	private String password;
 	
