@@ -3,10 +3,7 @@ package XApplication;
 import java.awt.BorderLayout;
 import java.util.Hashtable;
 
-import javax.swing.AbstractButton;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import XClass.XForm;
 import XObject.XObject;
 import tp_algoritmos2.Demo.EscuchaApp;
@@ -36,6 +33,7 @@ public class Application {
 	
 	public void showForm(String nombreForm) {
 		XForm form = forms.get(nombreForm);
+		form.onLoad();
 		form.draw();
 		frame.setSize(getWidth(), getWidth());
 		frame.setVisible(true);

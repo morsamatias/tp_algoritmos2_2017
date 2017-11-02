@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 
 import org.omg.CORBA.Request;
@@ -41,7 +40,7 @@ public abstract class XForm implements ActionListener {
 	Application frame = null;
 	Request request;
 	
-	public void onLoad(Request request) {}
+	public void onLoad() {}
 	public boolean onSubmit() { return true; }
 	public boolean onBack() { return true; }
 		

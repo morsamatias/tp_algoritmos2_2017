@@ -1,11 +1,6 @@
 package XObject;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.*;
 
 public class TextArea extends XObject {
 	
@@ -25,7 +20,6 @@ public class TextArea extends XObject {
 		}
 		catch(IllegalArgumentException|IllegalAccessException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		panelCentral.add(xlabel);

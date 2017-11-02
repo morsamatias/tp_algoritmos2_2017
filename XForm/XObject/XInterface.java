@@ -1,6 +1,5 @@
 package XObject;
 
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 
 public interface XInterface {

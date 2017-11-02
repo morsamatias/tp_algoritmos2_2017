@@ -3,16 +3,13 @@ package tp_algoritmos2;
 import java.util.List;
 import java.util.Optional;
 
-import XAnnotation.BackButton;
-import XAnnotation.Control;
-import XAnnotation.Form;
-import XAnnotation.NextButton;
+import XAnnotation.*;
 import XClass.XForm;
 import XObject.Table;
 import XObject.XObject;
 
 @NextButton(label="Siguiente", next="Pantalla2")
-@BackButton(label="Actualiza", name="Pantalla2")
+//@BackButton(label="Actualiza", name="Pantalla2")
 @Form(name="Pantalla1", title="Pantalla 1")
 public class Pantalla1 extends XForm
 {
@@ -28,7 +25,7 @@ public class Pantalla1 extends XForm
 			System.out.println("Debe seleccionar un item");
 			return false;
 		}
-		getFrame().setAnObject(tabla.get().getValueSelected());
+		getFrame().setAnObject(alumnos[Integer.valueOf(tabla.get().getValueSelected())]);
 		return super.onSubmit();
 	}
 	
@@ -49,6 +46,13 @@ public class Pantalla1 extends XForm
 	{
 		String[] alumn = {String.valueOf(alumno.getLegajo()), alumno.getNombre(), String.valueOf(alumno.getNota())};
 		return alumn;
+	}
+	
+	@Override
+	public void onLoad()
+	{
+		alumnos = traducirListaAlumnos(AlumnosDB.buscarTodos());
+		super.onLoad();
 	}
 	
 	@Override

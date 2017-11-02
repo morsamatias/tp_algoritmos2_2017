@@ -1,7 +1,5 @@
 package XObject;
 
-import java.awt.BorderLayout;
-
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
