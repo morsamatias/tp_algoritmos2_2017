@@ -33,4 +33,11 @@ public class ComboBox extends XObject {
 		return lista;
 	}
 
+	@Override
+	public int getValueSelected()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

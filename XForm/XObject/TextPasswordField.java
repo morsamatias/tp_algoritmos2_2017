@@ -35,4 +35,11 @@ public class TextPasswordField extends XObject {
 		return new String(xpass.getPassword());
 	}
 
+	@Override
+	public int getValueSelected()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -1,5 +1,7 @@
 package XObject;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -29,6 +31,13 @@ public class CheckBox extends XObject {
 	public Boolean getValue()
 	{
 		return xcheck.isSelected();
+	}
+
+	@Override
+	public int getValueSelected()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

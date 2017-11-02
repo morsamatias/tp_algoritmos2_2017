@@ -51,4 +51,11 @@ public class RadioBox extends XObject {
 		return lista;
 	}
 
+	@Override
+	public int getValueSelected()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -1,5 +1,7 @@
 package XObject;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -35,6 +37,13 @@ public class TextField extends XObject {
 	{
 		return xtext.getText();
 		
+	}
+
+	@Override
+	public int getValueSelected()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
   
 }

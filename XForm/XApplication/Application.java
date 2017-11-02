@@ -3,6 +3,8 @@ package XApplication;
 import java.awt.BorderLayout;
 import java.util.Hashtable;
 
+import javax.swing.AbstractButton;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import XClass.XForm;
@@ -17,6 +19,7 @@ public class Application {
 	private JFrame frame;
 	private JPanel panelCentral;
 	private JPanel panelSur;
+	private Object object = null;
 	// Variable para guardar todos los formularios que va a tener la aplicacion
 	Hashtable<String,XForm> forms = new Hashtable<>();
 	
@@ -48,10 +51,25 @@ public class Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public XForm getForm(String nombreForm)
+	{
+		return forms.get(nombreForm);
+	}
 		
 	public void addComponent(XObject component)
 	{
 		component.draw(panelCentral);
+		
+	}
+	
+	public void setAnObject(Object object)
+	{
+		this.object = object;		
+	}
+	
+	public Object getAnObject(){
+		return this.object;
 	}
 	
 	public JPanel getPanelCentral()

@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 
 import org.omg.CORBA.Request;
@@ -197,9 +198,9 @@ public abstract class XForm implements ActionListener {
 		}
 	}
 		
-	private Optional<XObject> getXObject(String nombre)
+	public Optional<XObject> getXObject(String nombre)
 	{
-		return listaControl.stream().filter(o -> o.getNombre() == nombre).findFirst();
+		return listaControl.stream().filter(o -> nombre.equals(o.getNombre())).findFirst();
 	}
 	
 	public void saveFields()

@@ -1,8 +1,11 @@
 package XObject;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.GroupLayout.Alignment;
 
 public class TextArea extends XObject {
 	
@@ -26,13 +29,20 @@ public class TextArea extends XObject {
 			e.printStackTrace();
 		}
 		panelCentral.add(xlabel);
-		panelCentral.add(xarea);	
+		panelCentral.add(xarea);
 	}
 
 	@Override
 	public String getValue()
 	{
 		return xarea.getText();
+	}
+
+	@Override
+	public int getValueSelected()
+	{
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

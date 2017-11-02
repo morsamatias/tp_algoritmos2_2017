@@ -14,7 +14,7 @@ public class Table extends XObject implements TableModelListener {
 	
 	JTable xtabla;
 	String[][] datos;
-
+	
 	@Override
 	public void draw(JPanel panelCentral)
 	{
@@ -58,6 +58,12 @@ public class Table extends XObject implements TableModelListener {
 	public String[][] getValue()
 	{
 		return datos;
+	}
+
+	@Override
+	public int getValueSelected()
+	{
+		return xtabla.getSelectedRow();
 	}
 
 }
