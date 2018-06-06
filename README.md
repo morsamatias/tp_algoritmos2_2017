@@ -1,5 +1,3 @@
-TP de Algoritmos Complejos para Estructuras de Datos Avanzadas 2017 2C
-
 <h1>
   <br>
   <div class="row">
